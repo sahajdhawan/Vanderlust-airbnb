@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Listing details :</h3>
+
+<ul>
+        <li><%=allListings.title %></a></li>
+        <li><%=allListings.description %></a></li>
+        <li>&#8377;<%=allListings.price.toLocaleString("en-IN") %></a></li>
+        <li><%=allListings.location %></a></li>
+        <li><%=allListings.country %></a></li>
+     
+            <a href="/listings/<%= allListings._id %>/edit">Edit this listing</a>  
+      <form action="/listings/<%= allListings._id %>?_method=DELETE" method="POST">
+        <button>Delete this listing</button>
+      </form>
+</ul>
+
+</body>
+</html> 
