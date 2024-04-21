@@ -12,3 +12,50 @@
 {
  color:black !important;   
 }
+.f-info-links
+{
+    text-decoration: none;
+    color: #222;
+    width: 100%;
+    vertical-align: middle;
+}
+.f-info-links a:hover
+{
+    text-decoration: underline;
+}
+.f-info-links a
+{
+text-decoration: none;
+color: black;
+}
+.f-info
+{
+    text-align: center;
+    display: flex;
+    height: 8rem;
+    background-color:#ebebeb ;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+.f-info-socials i
+{
+    font-size :1.2rem ;
+    margin-right: 0.5rem;
+}
+.f-info-socials,.f-info-links
+{
+    width: 100%;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    vertical-align: middle;
+    align-items: center;
+}
+.f-info-brand
+{
+    width: 100%;
+    font-size: 1rem;
+    margin-right: 1rem;
+    vertical-align: middle;
+    align-items: center;
+}
