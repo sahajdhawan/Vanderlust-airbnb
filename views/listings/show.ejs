@@ -8,6 +8,7 @@
         <li>&#8377;<%=allListings.price.toLocaleString("en-IN") %></a></li>
         <li><%=allListings.location %></a></li>
         <li><%=allListings.country %></a></li>
+        <li><%=allListings.image %></a></li>
      
             <a href="/listings/<%= allListings._id %>/edit">Edit this listing</a>  
       <form action="/listings/<%= allListings._id %>?_method=DELETE" method="POST">
