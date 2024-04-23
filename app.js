@@ -56,7 +56,7 @@ app.get("/listings/new", (req,res)=>
 app.get("/listings/:id",async (req,res)=>
 {let { id }=req.params;
     const allListings= await Listing.findById(id);
-    console.log(allListings.image);
+    
   res.render("listings/show.ejs",{ allListings });
 })
 //create rouet
