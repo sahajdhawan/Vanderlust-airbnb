@@ -8,31 +8,36 @@
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
     <input type="text" name="listing[title]" id="" placeholder="enter title"class="form-control" required>
+    <div class="invalid-feedback">Please enter the title</div>
     </div>
     
 
 <div class="mb-3">
     <label for="description" class="form-label">description</label>
     <textarea name="listing[description]" id="" cols="30" rows="5" placeholder="enter description" class="form-control" required></textarea>
-
+<div class="invalid-feedback">Please enter a valid description</div>
+<div class="valid-feedback">This looks good</div>
 </div>
    
 
     <div class="mb-3">
         <label for="image" class="form-label"> Image Url</label>
     <input type="text" name="listing[image]" id="" placeholder="enter image url"class="form-control" required>
+    <div class="invalid-feedback">Please enter the url for the image </div>
     </div>
     
 <div class="row">
     <div class="mb-3 col-md-4">
     <label for="price" class="form-label">Price</label>
-    <input type="number" name="listing[price]" id="" placeholder="enter price" class="form-control" required>
+    <input type="text" name="listing[price]" id="" placeholder="enter price" class="form-control" required>
+    <div class="invalid-feedback">Please enter a valid price</div>
     
 </div>
 
     <div class="mb-3 col-md-8">
     <label for="location" class="form-label">Location</label>
     <input type="text" name="listing[location]" id="" placeholder="enter location" class="form-control" required>
+    <div class="invalid-feedback">Please enter ur preferred location</div>
  
 </div>
 </div>   
@@ -40,6 +45,7 @@
     <div class="mb-3">
     <label for="country" class="form-label">Country</label>
     <input type="text" name="listing[country]" id="" placeholder="enter country"class="form-control" required>
+    <div class="invalid-feedback">Please enter ur country</div>
    
 </div> 
     <button class="btn btn-dark add-btn">Add </button>
