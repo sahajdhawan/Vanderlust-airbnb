@@ -12,6 +12,7 @@ const ExpressError=require("./utils/ExpressError.js");
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 const { listingSchema, reviewSchema } = require("./schema.js");
+const review = require("./models/review.js");
 
 app.use(express.urlencoded({extended :true}));
 app.use(methodOverride("_method"));
@@ -146,7 +147,16 @@ listing.reviews.push(newReview);
 
  res.redirect(`/listings/${listing.id}`);
 })
+
 );
+//delete Review route
+app.delete("/listings/:id/reviews/:reviewId",wrapAsync(async(req,res)=>
+{
+    let {id ,reviewId } =req.params;
+  await Listing.findByIdAndUpdate(id, { $pull : { reviews : reviewId } });
+     await Review.findByIdAndDelete(reviewId);
+     res.redirect(`/listings/${id}`);
+}))
 app.all("*",(req,res,next)=>
 {
     next(new ExpressError(404,"page not found"));
