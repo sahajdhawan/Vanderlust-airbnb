@@ -1,7 +1,7 @@
 const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
-const mongo_url="mongodb://127.0.0.1:27017/wanderlust";
+const mongo_url="mongodb+srv://sahajd:coolsahaj@cluster0.2jqgh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const Listing=require("./models/listing.js");
 const listings=require("./routes/listing.js");
 const path=require("path");
@@ -11,16 +11,30 @@ const ejsMate=require("ejs-mate");
 const wrapAsync=require("./utils/wrapAsync.js");
 const Review=require("./models/review.js");
 const ExpressError=require("./utils/ExpressError.js");
+const session=require("express-session");
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 const { listingSchema, reviewSchema } = require("./schema.js");
 const review = require("./models/review.js");
+const flash=require("connect-flash");
 
 app.use(express.urlencoded({extended :true}));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
+const sessionOptions={
+    secret : "mysupersecretcode",
+    resave: false,
+    saveUninitialized :true,
+    cookie: {
+        expires:Date.now()+7*24*60*60*1000,
+        maxAge:7*24*60*60*1000,
+        httpOnly: true,
+    },
 
+}
+app.use(session(sessionOptions));
+app.use(flash());
 main().then(()=>
 {
     console.log("connected to db");
@@ -39,6 +53,13 @@ app.get("/",(req,res)=>
     res.send("Hi i am root");
 
 });
+app.use((req,res,next) =>
+{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+
+    next();
+})
 // app.get("/testListing",async(req,res)=>
 // {
 // let sampleListing= new Listing({
