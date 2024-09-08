@@ -3,10 +3,11 @@ const app=express();
 const mongoose=require("mongoose");
 const mongo_url="mongodb+srv://sahajd:coolsahaj@cluster0.2jqgh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const Listing=require("./models/listing.js");
-const listings=require("./routes/listing.js");
+const listingRouter=require("./routes/listing.js");
+const userRouter=require("./routes/user.js");
 const path=require("path");
 const methodOverride=require("method-override");
-const reviews=require("./routes/reviews.js");
+const reviewRouter=require("./routes/reviews.js");
 const ejsMate=require("ejs-mate");
 const wrapAsync=require("./utils/wrapAsync.js");
 const Review=require("./models/review.js");
@@ -17,6 +18,9 @@ app.set("views",path.join(__dirname,"views"));
 const { listingSchema, reviewSchema } = require("./schema.js");
 const review = require("./models/review.js");
 const flash=require("connect-flash");
+const passport=require("passport");
+const LocalStrategy=require("passport-local");
+const User=require("./models/user.js");
 
 app.use(express.urlencoded({extended :true}));
 app.use(methodOverride("_method"));
@@ -35,6 +39,11 @@ const sessionOptions={
 }
 app.use(session(sessionOptions));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 main().then(()=>
 {
     console.log("connected to db");
@@ -53,6 +62,7 @@ app.get("/",(req,res)=>
     res.send("Hi i am root");
 
 });
+
 app.use((req,res,next) =>
 {
     res.locals.success=req.flash("success");
@@ -71,9 +81,19 @@ app.use((req,res,next) =>
 // });
 //index route
 
+app.get("/demouser",async (req,res)=>
+{
+    let fakeUser= new User({
+        email:"student45@gmail.com",
+        username:"delta-student23"
 
-app.use("/listings",listings);
-app.use("/listings/:id/reviews",reviews);
+    });
+  let registeredUser= await User.register(fakeUser,"helloworld");
+    res.send(registeredUser);
+})
+app.use("/listings",listingRouter);
+app.use("/listings/:id/reviews",reviewRouter);
+app.use("/",userRouter);
 app.all("*",(req,res,next)=>
 {
     next(new ExpressError(404,"page not found"));
