@@ -33,12 +33,13 @@ router.get("/",wrapAsync(async (req,res)=>
     //show route
     router.get("/:id",wrapAsync(async (req,res)=>
     {let { id }=req.params;
-        const allListings= await Listing.findById(id).populate("reviews");
+        const allListings= await Listing.findById(id).populate("reviews").populate("owner");
         if(!allListings)
         {
             req.flash("error","listing you requested for does not exist !");
             res.redirect("/listings");
         }
+        console.log(allListings);
       res.render("listings/show.ejs",{ allListings });
     }));
     //create rouet
