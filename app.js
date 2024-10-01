@@ -19,6 +19,7 @@ const wrapAsync=require("./utils/wrapAsync.js");
 const Review=require("./models/review.js");
 const ExpressError=require("./utils/ExpressError.js");
 const session=require("express-session");
+const MongoStore = require('connect-mongo');
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 const { listingSchema, reviewSchema } = require("./schema.js");
@@ -32,7 +33,19 @@ app.use(express.urlencoded({extended :true}));
 app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
+const store=MongoStore.create({
+    mongoUrl: mongo_url,
+    crypto:{
+        secret:"mysupersecretcode"
+    },
+    touchAfter:24*60*60, //24 hours
+    
+});
+store.on("error",function(e){
+    console.log("SESSION STORE ERROR",e);
+})
 const sessionOptions={
+    store:store,
     secret : "mysupersecretcode",
     resave: false,
     saveUninitialized :true,
@@ -43,6 +56,7 @@ const sessionOptions={
     },
 
 }
+
 app.use(session(sessionOptions));
 app.use(flash());
 app.use(passport.initialize());
