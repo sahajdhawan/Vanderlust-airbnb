@@ -1,3 +1,9 @@
+if(process.env.NODE_ENV !== "production"){
+    require('dotenv').config()
+}
+
+
+
 const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
@@ -57,11 +63,11 @@ async function main()
 {
    await  mongoose.connect(mongo_url);
 }
-app.get("/",(req,res)=>
-{
-    res.send("Hi i am root");
+// app.get("/",(req,res)=>
+// {
+//     res.send("Hi i am root");
 
-});
+// });
 
 app.use((req,res,next) =>
 {

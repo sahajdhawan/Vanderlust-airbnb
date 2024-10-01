@@ -1,11 +1,10 @@
 <% layout("/layouts/boilerplate.ejs") %>
-<div class="row mt-4">
-    <div class="col-8 offset-2"></div>
+
 
 
 <body>
     <h3>Edit the listing</h3>
-    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
+    <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
        <div class="mb-3">
         <label for="title" class="form-label">Title</label>
 
@@ -18,10 +17,15 @@
         <textarea name="listing[description]" id="" cols="30" rows="10" class="form-control" required ><%= listing.description %></textarea>
     </div>
     <div class="mb-3">
-        <label for="image" class="form-label"> Image Url</label>
+        Original Listing Image
+        <br>
+        <img src="<%= originalImageUrl %>" alt="">
+     </div>
 
-        <input type="text" name="listing[image]" id=""  value="<%= listing.image %>" class="form-control"  required>
-        <div class="invalid-feedback">Please enter the required image url</div>
+    <div class="mb-3">
+        <label for="image" class="form-label"> Upload new image</label>
+
+        <input type="file" name="listing[image]" id=""  value="<%= listing.image %>" class="form-control" >
      </div>
      <div class="row">
      <div class="mb-3 col-md-4">
@@ -40,7 +44,7 @@
     <div class="mb-3">
         <label for="country" class="form-label">Country</label>
 
-        <input type="text" name="listing[country]" id=""  value="<%= listing.title %>" class="form-control"  required>
+        <input type="text" name="listing[country]" id=""  value="<%= listing.country %>" class="form-control"  required>
         <div class="invalid-feedback">Please enter the country</div>
     </div>
         <button class="btn btn-dark edit-btn mt-3">Edit</button>
