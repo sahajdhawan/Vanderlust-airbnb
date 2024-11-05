@@ -47,47 +47,47 @@ align-items: center;
     </style>
 
     <div id="filters">
-        <div class="filter">
+        <div class="filter" data-category="Trending">
           <div>  <i class="fa-solid fa-fire"></i> </div>
            <p> Trending </p>
         </div>
-        <div class="filter">
+        <div class="filter" data-category="Rooms">
             <div> <i class="fa-solid fa-bed"></i> </div>
              <p> Rooms</p>
           </div>
-          <div class="filter">
+          <div class="filter" data-category="Iconic cities" >
             <div> <i class="fa-solid fa-mountain-city"></i> </div>
              <p> Iconic cities </p>
           </div>
-          <div class="filter">
-              <div><i class="fa-solid fa-mountain"></i> </div>
+          <div class="filter" data-category="Mountains" >
+              <div><i class="fa-solid fa-mountain" ></i> </div>
                <p> Mountains</p>
             </div>
-            <div class="filter">
+            <div class="filter" data-category="Castles">
                 <div> <i class="fa-brands fa-fort-awesome"></i> </div>
                  <p> Castles</p>
               </div>
-              <div class="filter">
+              <div class="filter" data-category="Amazing Pools">
                   <div> <i class="fa-solid fa-person-swimming"></i> </div>
                    <p> Amazing Pools</p>
                 </div>  
-                <div class="filter">
+                <div class="filter" data-category="Camping">
                     <div><i class="fa-solid fa-campground"></i> </div>
                      <p> Camping</p>
                   </div>
-                  <div class="filter">
+                  <div class="filter" data-category="Farms">
                       <div> <i class="fa-solid fa-cow"></i> </div>
                        <p>Farms</p>
                     </div>
-                    <div class="filter">
+                    <div class="filter" data-category="Arctic">
                         <div> <i class="fa-regular fa-snowflake"></i> </div>
                          <p> Arctic</p>
                       </div> 
-                      <div class="filter">
+                      <div class="filter" data-category="Islands">
                         <div> <i class="fa-solid fa-umbrella-beach"></i> </div>
                          <p>Islands</p>
                       </div>
-                      <div class="filter">
+                      <div class="filter" data-category="Domes">
                           <div> <i class="fa-solid fa-landmark-dome"></i> </div>
                            <p> Domes</p>
                         </div> 
@@ -103,19 +103,22 @@ align-items: center;
         <button>Create new  listing</button>
     </form> -->
     <div class="row row-cols-xl-3 row-cols-md-2 row-cols-sm-1  mt-4">
+        
         <% for (let listing of allListings){ %>
             <a href="/listings/<%= listing._id %>"  class="listing-link">
             <div class="card col" >
                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
                <div class="card-img-overlay">
-                abcd
+                
                </div>
                 <div class="card-body">
                   <p class="card-text">
+                    <b><%= listing.listing_type %></b>
                    <b> <%=listing.title %></b><br>
-                    &#8377;<%=listing.price.toLocaleString("en-IN") 
+                    &#8377;<%=listing.price .toLocaleString("en-IN") 
                     %>/night
-                    <i class="tax-info"> &nbsp; &nbsp; +18% GST</i>
+                    <br>
+                    <i class="tax-info"> &nbsp; &nbsp; Total Price with 18% GST   <%=(listing.price *1.18) %>/night </i>
             </p>
                 </div>
               </div>
@@ -123,8 +126,10 @@ align-items: center;
               <% } %>
     </div>
     </body>
+   
     <script>
         let taxSwitch=document.getElementById('flexSwitchCheckDefault');
+    
         taxSwitch.addEventListener("click",()=>{
            let taxInfo=document.getElementsByClassName('tax-info');
            console.log(taxInfo);
@@ -141,6 +146,65 @@ align-items: center;
            }
 
         })
+        
+// Output the listings in the browser console
+
+
+const allListings = <%- JSON.stringify(allListings) %>;
+
+    // Select all filter elements
+    const filters = document.querySelectorAll('.filter');
+
+    // Select all listing elements
+    const listings = document.querySelectorAll('.listing-link');
+
+    filters.forEach(filter => {
+        filter.addEventListener("click", () => {
+            const filterValue = filter.getAttribute('data-category'); // Get filter category
+            console.log("Selected filter:", filterValue);
+
+            listings.forEach(listing => {
+                // Get the listing type from the corresponding data attribute or class
+                const listingType = listing.querySelector('.card-text b').innerText.trim(); // Assuming title is in b tag
+                
+                // Show or hide listings based on the filter
+                if (listingType === filterValue || filterValue === "All") { // Include "All" to show all listings
+                    listing.style.display = "block"; // Show matching listings
+                } else {
+                    listing.style.display = "none"; // Hide non-matching listings
+                }
+            });
+        });
+    });
+    const search = document.querySelector(".btn-search");
+    const searchInput = document.querySelector(".search-input");
+
+    searchInput.addEventListener("input", () => {
+        event.preventDefault();
+        const query = searchInput.value.trim().toLowerCase();
+        listings.forEach(listing => {
+            const title = listing.querySelector(".card-text b:nth-child(2)").innerText.trim().toLowerCase();
+            if (title.includes(query)) {
+                listing.style.display = "block";
+            } else {
+                listing.style.display = "none";
+            }
+        });
+    });
+    
+   
+  
+
+
+
+        
+
+
+    
+          
+    //     }
+    //     )})
+        
     </script>
    
 

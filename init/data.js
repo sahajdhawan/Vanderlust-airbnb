@@ -10,6 +10,7 @@ const sampleListings = [
     price: 1500,
     location: "Malibu",
     country: "United States",
+    listing_type: "Cottage",
   },
   {
     title: "Modern Loft in Downtown",
@@ -22,6 +23,7 @@ const sampleListings = [
     price: 1200,
     location: "New York City",
     country: "United States",
+    listing_type: "Rooms",
   },
   {
     title: "Mountain Retreat",
@@ -34,6 +36,7 @@ const sampleListings = [
     price: 1000,
     location: "Aspen",
     country: "United States",
+    listing_type:"farms",
   },
   {
     title: "Historic Villa in Tuscany",
@@ -46,6 +49,7 @@ const sampleListings = [
     price: 2500,
     location: "Florence",
     country: "Italy",
+    listing_type:"Trending"
   },
   {
     title: "Secluded Treehouse Getaway",
@@ -58,6 +62,7 @@ const sampleListings = [
     price: 800,
     location: "Portland",
     country: "United States",
+    listing_type:"Iconic cities"
   },
   {
     title: "Beachfront Paradise",
@@ -70,6 +75,7 @@ const sampleListings = [
     price: 2000,
     location: "Cancun",
     country: "Mexico",
+    listing_type: "Iconic cities",
   },
   {
     title: "Rustic Cabin by the Lake",
@@ -82,6 +88,8 @@ const sampleListings = [
     price: 900,
     location: "Lake Tahoe",
     country: "United States",
+    listing_type:"Mountains",
+
   },
   {
     title: "Luxury Penthouse with City Views",
@@ -94,6 +102,7 @@ const sampleListings = [
     price: 3500,
     location: "Los Angeles",
     country: "United States",
+    listing_type:"Castles"
   },
   {
     title: "Ski-In/Ski-Out Chalet",
@@ -106,6 +115,7 @@ const sampleListings = [
     price: 3000,
     location: "Verbier",
     country: "Switzerland",
+    listing_type:"Amazing Pools"
   },
   {
     title: "Safari Lodge in the Serengeti",
@@ -118,6 +128,7 @@ const sampleListings = [
     price: 4000,
     location: "Serengeti National Park",
     country: "Tanzania",
+    listing_type:"Camping"
   },
   {
     title: "Historic Canal House",
@@ -130,6 +141,7 @@ const sampleListings = [
     price: 1800,
     location: "Amsterdam",
     country: "Netherlands",
+    listing_type:"Farms",
   },
   {
     title: "Private Island Retreat",
@@ -142,6 +154,7 @@ const sampleListings = [
     price: 10000,
     location: "Fiji",
     country: "Fiji",
+    listing_type:"Arctic",
   },
   {
     title: "Charming Cottage in the Cotswolds",
@@ -154,6 +167,7 @@ const sampleListings = [
     price: 1200,
     location: "Cotswolds",
     country: "United Kingdom",
+    listing_type:"Islands",
   },
   {
     title: "Historic Brownstone in Boston",
@@ -166,6 +180,7 @@ const sampleListings = [
     price: 2200,
     location: "Boston",
     country: "United States",
+    listing_type:"Domes"
   },
   {
     title: "Beachfront Bungalow in Bali",
@@ -347,6 +362,22 @@ const sampleListings = [
     location: "Costa Rica",
     country: "Costa Rica",
   },
+  
+    {
+      title: "Trendy Loft in Downtown",
+      description: "Stay in this sleek loft located in the heart of the city, close to all the best nightlife spots.",
+      image: {
+        filename: "trending1",
+        url: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bG9mdCUyMGRvd250b3dufGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60"
+      },
+      price: 2200,
+      location: "New York",
+      country: "United States",
+      listing_type: "Trending"
+    }
+    
+  
+  
 ];
 
 module.exports = { data: sampleListings };

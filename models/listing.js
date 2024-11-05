@@ -26,7 +26,8 @@ const listingSchema = new Schema({
     type:Schema.Types.ObjectId,
     ref:"User",
     required:true,
-  }
+  },
+  listing_type:String,
 
 });
 listingSchema.post("findOneAndDelete",async(listing)=>
